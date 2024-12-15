@@ -6,9 +6,11 @@ lst += ['human'] * 10
 random.shuffle(lst)
 data = pd.DataFrame({'who': lst})
 
-print(data.head())
+one_hot_complete = pd.DataFrame({
+    'robot': [1 if x == 'robot' else 0 for x in data['who']],
+    'human': [1 if x == 'human' else 0 for x in data['who']]
+})
 
-one_hot_human = pd.DataFrame({'human': [1 if x == 'human' else 0 for x in data['who']]})
-result_human = pd.concat([data, one_hot_human], axis=1)
+result_complete = pd.concat([data, one_hot_complete], axis=1)
 
-print(result_human.head())
+print(result_complete.head())
